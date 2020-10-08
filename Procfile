@@ -1,1 +1,1 @@
-web: gunicorn base_herokuProj/herokuProj.wsgi --log-file -
+web: gunicorn --pythonpath base_herokuProj herokuProj.wsgi --log-file -
