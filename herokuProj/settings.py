@@ -137,3 +137,7 @@ MEDIA_ROOT = 'media'
 MEDIA_URL = '/media-url/'
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+PLOTLY_DASH = {
+    "view_decorator": "django_plotly_dash.access.login_required",
+}
