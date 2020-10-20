@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load plotly_dash %}
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -95,6 +96,9 @@
             <h1 class="title-bar-title">Basic template</h1>
             <p class="title-bar-description">
               <small>Use this page as a basic template for developing your application.</small>
+
+                {% plotly_app name="SimpleExample" %}
+
             </p>
           </div>
         </div>
