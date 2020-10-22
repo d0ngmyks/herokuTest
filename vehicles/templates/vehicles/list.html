@@ -6,7 +6,7 @@
     <div>
     {{ button }}
     </div>
-    {% if plotly_sample %}
-        {% plotly_direct name=plotly_sample %}
-    {% endif %}
+{#    {% plotly_direct name='VehiclesList' %} {#  Conflict css/js of Dash & Elephant if using plotly_direct#}
+    {% plotly_app name='VehiclesList' %}
+    {% plotly_app name='BtnCount' %}
 {% endblock %}

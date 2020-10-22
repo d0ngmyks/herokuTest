@@ -92,6 +92,14 @@
                             <span class="sidenav-label">Basic template</span>
                         </a>
                     </li>
+                    <!--insert apps-->
+                    <!-- TODO: make this dynamic -->
+                    <li class="sidenav-item">
+                        <a href="{% url 'vehicles_list' %}">
+                            <span class="sidenav-icon icon-truck icon"></span>
+                            <span class="sidenav-label">Vehicles</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -107,12 +115,13 @@
 
                 </p>
             </div>
+            <div>
                 {% block content %}
                     {% if plotly_sample %}
                         {% plotly_app name=plotly_sample %}
-{#                        {% plotly_direct name=plotly_sample %}#}
                     {% endif %}
                 {% endblock %}
+            </div>
         </div>
     </div>
 </div>
