@@ -3,22 +3,13 @@
 {% load plotly_dash %}
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Basic template</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="icon" href="favicon.ico">
-    <link rel="stylesheet" href="{% static 'elephant/css/vendor.min.css' %}">
-    <link rel="stylesheet" href="{% static 'elephant/css/elephant.min.css' %}">
-    <link rel="stylesheet" href="{% static 'elephant/css/application.min.css' %}">
+    {% include 'base/head.html' %}
   </head>
   <body class="layout">
     <div class="layout-header">
       <div class="navbar navbar-default">
-        <div class="navbar-header">
-          <a class="navbar-brand navbar-brand-center" href="/">Elephant Template</a>
+        <div class="navbar-header">  {# style="background-color: green;" #}
+          <a class="navbar-brand navbar-brand-center" href="/Lib/site-packages">Elephant Template</a>
           <button class="navbar-toggler collapsed visible-xs-block" type="button" data-toggle="collapse" data-target="#sidenav">
             <span class="sr-only">Toggle navigation</span>
             <span class="bars">
@@ -81,7 +72,7 @@
             <ul class="sidenav">
               <li class="sidenav-heading">Navigation</li>
               <li class="sidenav-item">
-                <a href="/">
+                <a href="/Lib/site-packages">
                   <span class="sidenav-icon icon icon-th"></span>
                   <span class="sidenav-label">Basic template</span>
                 </a>
@@ -100,6 +91,8 @@
                 {% plotly_app name="SimpleExample" %}
 
             </p>
+                {% block content %}
+                {% endblock %}
           </div>
         </div>
       </div>
