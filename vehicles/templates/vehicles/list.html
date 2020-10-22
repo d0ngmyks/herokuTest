@@ -1,11 +1,12 @@
 {% extends 'base/base.html' %}
-{#{% extends 'base/elephant/layout/main/main.html' %}#}
+{% load plotly_dash %}
 
-dong
 {% block content %}
-
     vehicles list
     <div>
     {{ button }}
     </div>
+    {% if plotly_sample %}
+        {% plotly_direct name=plotly_sample %}
+    {% endif %}
 {% endblock %}

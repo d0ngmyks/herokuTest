@@ -54,6 +54,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # dpd
+    'django_plotly_dash.middleware.BaseMiddleware',  # This middleware should appear low down the middleware list. ->https://django-plotly-dash.readthedocs.io/en/stable/template_tags.html#the-plotly-header-and-plotly-footer-template-tags
 ]
 
 ROOT_URLCONF = 'herokuProj.urls'
