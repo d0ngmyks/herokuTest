@@ -2,7 +2,8 @@ from django.views.generic import ListView
 from .models import Specification
 
 class VehiclesListView(ListView):
-    template_name = 'vehicles/list.html'
+    # template_name = 'vehicles/list.html'
+    template_name = 'base/base.html'
     model = Specification
 
     def get_context_data(self, **kwargs):
