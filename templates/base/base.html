@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    {% include 'base/elephant/head.html' %}
+</head>
+<body class="layout">
+    {% include 'base/elephant/layout/header/header.html' %}
+    {% include 'base/elephant/layout/main/main.html' %}
+
+<!--
+{# transferred codes from the basic template #}
+    {# <body-here-1 #}
+    {#  scripts was here, transfer to footer using include 'base/elephant/scripts.html' #}
+    -->
+</body>
+<footer>
+    {% include 'base/elephant/layout/footer/footer.html' %}
+    {% include 'base/elephant/scripts.html' %}
+</footer>
+</html>

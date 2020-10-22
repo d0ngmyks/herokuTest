@@ -11,4 +11,5 @@ class VehiclesListView(ListView):
 
         button = dbc.Button("Block button", color="primary", block=True)
         context['button'] = button
+        context['plotly_sample'] = 'SimpleExample'
         return context
