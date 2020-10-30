@@ -2,11 +2,92 @@
 {% load plotly_dash %}
 
 {% block content %}
-    vehicles list
-    <div>
-    {{ button }}
+    <style>
+        /* Extra small devices (phones, 600px and down) */
+        @media only screen and (max-width: 600px) {
+            .django-plotly-dash-app-vehiclesdashapp div {
+                padding-bottom: 95% !important;
+            }
+            body{
+                background-color: red;
+            }
+        }
+
+        /* Small devices (portrait tablets and large phones, 600px and up) */
+        @media only screen and (min-width: 600px) {
+            .django-plotly-dash-app-vehiclesdashapp div {
+                padding-bottom: 73% !important;
+            }
+            body{
+                background-color: orange;
+            }
+        }
+
+        /* Medium devices (landscape tablets, 768px and up) */
+        /**/
+        /* Elephant's sidenavbar shows up (collapsed) on screen width >= 768px */
+        /**/
+        @media only screen and (min-width: 768px) {
+            .django-plotly-dash-app-vehiclesdashapp div {
+                padding-bottom: 60% !important;
+            }
+            body{
+                background-color: yellow;
+            }
+        }
+
+        /* Large devices (laptops/desktops, 992px and up) */
+        /**/
+        /* Elephant's sidenavbar shows up (not collapsed) on screen width >= 992px */
+        /**/
+        @media only screen and (min-width: 992px) {
+            .django-plotly-dash-app-vehiclesdashapp div {
+                padding-bottom: 48% !important;
+            }
+            body{
+                background-color: green;
+            }
+        }
+
+        /* Extra large devices (large laptops and desktops, 1200px and up) */
+        @media only screen and (min-width: 1200px) {
+            .django-plotly-dash-app-vehiclesdashapp div {
+                padding-bottom: 42% !important;
+            }
+            body{
+                background-color: blue;
+            }
+        }
+    </style>
+    <div class="{% plotly_class name="VehiclesDashApp" %}">
+
+        {% plotly_app name="VehiclesDashApp" use_frameborder="1" ratio=1 %}
     </div>
-{#    {% plotly_direct name='VehiclesList' %} {#  Conflict css/js of Dash & Elephant if using plotly_direct#}
-    {% plotly_app name='VehiclesList' %}
-    {% plotly_app name='BtnCount' %}
 {% endblock %}
+
+
+{#    {% plotly_direct name='VehiclesList' %} {#  Conflict css/js of Dash & Elephant if using plotly_direct#}
+{#    {% plotly_app name='VehiclesList' use_frameborder='1' ratio=0.2 %}#}
+{#    {% plotly_app name='BtnCount' use_frameborder='1' ratio=0.2 %}#}
+
+{#    {% plotly_app name='VehiclesDashApp' use_frameborder='1' ratio=0.4 %}#}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <div class="col">#}
+{#                <div class="{% plotly_class name="VehiclesDashApp" %}">#}
+{#                    {% plotly_app_bootstrap name="VehiclesDashApp" %}#}
+{#                    {% plotly_app name="VehiclesDashApp" ratio=0.4 %}#}
+{#                    {% plotly_header %}#}
+{#                    {% plotly_direct name="VehiclesDashApp" %}#}
+{#                    {% plotly_footer %}#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <i class="icon-trash icon"></i>#}
+{#    <i class="icon-trash-o icon-4x icon"></i>#}
+{#    <span class="sidenav-icon icon-plus icon"></span>#}
+{#    <span class="sidenav-icon icon-plus-circle icon"></span>#}
+{#    <span class="sidenav-icon icon-plus-square icon"></span>#}
+{#    <span class="sidenav-icon icon-plus-square-o icon"></span>#}
+{#    <span class="sidenav-icon icon-google-plus-square icon"></span>#}

@@ -6,4 +6,4 @@ urlpatterns = [
     path('', views.VehiclesListView.as_view(), name='vehicles_list'),
 ]
 
-from .dash import list, btn_count
+from .dash import index

@@ -18,8 +18,10 @@ app.layout = html.Div([
         options=[{'label': i, 'value': j} for i, j in [('L','large'), ('M','medium'), ('S','small')]],
         value='medium'
     ),
-    html.Div(id='output-size')
-
+    html.Div(id='output-size'),
+    dcc.Location(id='url'),
+    dcc.Link('Navigate to "/vehicles/"', href='/vehicles/'),
+    html.Div(id='vehicles-output'),
 ])
 
 @app.callback(
@@ -35,3 +37,12 @@ def callback_color(dropdown_value):
 def callback_size(dropdown_color, dropdown_size):
     return "The chosen T-shirt is a %s %s one." %(dropdown_size,
                                                   dropdown_color)
+
+@app.callback(
+    dash.dependencies.Output('vehicles-output', 'children'),
+    [dash.dependencies.Input('url', 'pathname')],
+)
+def display_vehicles(pathname):
+    return html.Div([
+        html.H3('You are on page {}'.format(pathname))
+    ])

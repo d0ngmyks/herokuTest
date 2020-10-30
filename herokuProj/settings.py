@@ -43,11 +43,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_plotly_dash.apps.DjangoPlotlyDashConfig',
+    'dpd_static_support',
+    'bootstrap4',
     'vehicles.apps.VehiclesConfig',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -57,6 +62,7 @@ MIDDLEWARE = [
 
     # dpd
     'django_plotly_dash.middleware.BaseMiddleware',  # This middleware should appear low down the middleware list. ->https://django-plotly-dash.readthedocs.io/en/stable/template_tags.html#the-plotly-header-and-plotly-footer-template-tags
+    'django_plotly_dash.middleware.ExternalRedirectionMiddleware',
 ]
 
 ROOT_URLCONF = 'herokuProj.urls'
@@ -144,4 +150,34 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 PLOTLY_DASH = {
     "view_decorator": "django_plotly_dash.access.login_required",
+    # "serve_locally": True,  # for deployment
 }
+
+# Staticfiles finders for locating dash app assets and related files
+STATICFILES_FINDERS = [
+
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+
+    'django_plotly_dash.finders.DashAssetFinder',
+    'django_plotly_dash.finders.DashComponentFinder',
+    'django_plotly_dash.finders.DashAppDirectoryFinder',
+]
+
+# Plotly components containing static content that should
+# be handled by the Django staticfiles infrastructure
+PLOTLY_COMPONENTS = [
+
+    # Common components
+    'dash_core_components',
+    'dash_html_components',
+    'dash_renderer',
+
+    # django-plotly-dash components
+    'dpd_components',
+    # static support if serving local assets
+    'dpd_static_support',
+
+    # Other components, as needed
+    'dash_bootstrap_components',
+]

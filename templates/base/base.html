@@ -4,6 +4,7 @@
 
 <html lang="en">
 <head>
+{#    {% plotly_header %}#}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Project R&D</title>
@@ -14,9 +15,9 @@
     <link rel="stylesheet" href="{% static 'elephant/css/vendor.min.css' %}">
     <link rel="stylesheet" href="{% static 'elephant/css/elephant.min.css' %}">
     <link rel="stylesheet" href="{% static 'elephant/css/application.min.css' %}">
-    {% plotly_header %}
 </head>
-<body class="layout">
+{#<body class="layout">#}
+<body class="layout layout-sidebar-collapsed">
 <div class="layout-header">
     <div class="navbar navbar-default">
         <div class="navbar-header">  {# style="background-color: green;" #}
@@ -43,7 +44,8 @@
         </div>
         <div class="navbar-toggleable">
             <nav id="navbar" class="navbar-collapse collapse">
-                <button class="sidenav-toggler hidden-xs" title="Collapse sidenav ( [ )" type="button">
+{#                <button class="sidenav-toggler hidden-xs" title="Collapse sidenav ( [ )" type="button">#}
+                <button class="sidenav-toggler hidden-xs collapsed" title="Expand sidenav ( [ )" type="button" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="bars">
                         <span class="bar-line bar-line-1 out"></span>
@@ -84,7 +86,8 @@
         <div class="layout-sidebar-backdrop"></div>
         <div class="layout-sidebar-body">
             <nav id="sidenav" class="sidenav-collapse collapse">
-                <ul class="sidenav">
+{#                <ul class="sidenav">#}
+                <ul class="sidenav sidenav-collapsed" aria-expanded="false" style="">
                     <li class="sidenav-heading">Navigation</li>
                     <li class="sidenav-item">
                         <a href="/Lib/site-packages">
@@ -107,18 +110,17 @@
     <div class="layout-content">
         <div class="layout-content-body">
             <div class="title-bar">
-                <h1 class="title-bar-title">Basic template</h1>
+                <h1 class="title-bar-title">{App}</h1>
                 <p class="title-bar-description">
-                    <small>Use this page as a basic template for developing your application.</small>
-
-                    {#                {% plotly_app name="SimpleExample" %}#}
-
+                    <small>{% lorem 16 w %}</small>
                 </p>
             </div>
             <div>
                 {% block content %}
-                    {% if plotly_sample %}
-                        {% plotly_app name=plotly_sample %}
+                    <h3>Welcome!</h3>
+                    {% if plotly_sample %}  <!--Welcome Page (?)-->
+                        {% plotly_app name=plotly_sample ratio=0.2 %}
+{#                        {% plotly_direct name=plotly_sample %}#}
                     {% endif %}
                 {% endblock %}
             </div>
@@ -143,6 +145,6 @@
     <script src="{% static 'elephant/js/vendor.min.js' %}"></script>
     <script src="{% static 'elephant/js/elephant.min.js' %}"></script>
     <script src="{% static 'elephant/js/application.min.js' %}"></script>
-    {% plotly_footer %}
+{#    {% plotly_footer %}#}
 </footer>
 </html>
