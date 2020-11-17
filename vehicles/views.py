@@ -22,7 +22,9 @@ from django.shortcuts import render
 #         return context
 
 def vehicles_app(request):
-    print('views ########')
+    print('# # # # # # # # # # # # # # # # # # # # # # # #')
+    print("# # # # # # # # Django's views # # # # # # # #")
+    print('# # # # # # # # # # # # # # # # # # # # # # # #')
     # breakpoint()
     return render(request, 'vehicles/list.html')
 
@@ -42,9 +44,6 @@ def fuel_type_choices():
         fuel_type_choices.append({'value': value, 'label': label})
     return fuel_type_choices
 
-# 'plate_number', 'fuel_type', 'odometer', 'odo_date_as_of', 'other_details'
 def save_vehicle(plate_number, fuel_type, odometer, odo_date_as_of, other_details):
     vehicle = Specification(plate_number=plate_number, fuel_type=fuel_type, odometer=odometer, odo_date_as_of=odo_date_as_of, other_details=other_details)
     vehicle.save()
-
-
