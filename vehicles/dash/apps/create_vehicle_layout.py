@@ -80,7 +80,6 @@ def save_and_toggle_alert(n, plate_number, fuel_type, odometer, odo_date, other_
             other_details):
         # manual validation
         # (?) add dbc.formfeedback with the validations (?)
-        print(plate_number, fuel_type, odometer, odo_date, other_details)
         save_vehicle(plate_number, fuel_type, odometer, odo_date, other_details)
     if n:
         return not is_open, f'New vehicle added: {plate_number}'

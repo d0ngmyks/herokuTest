@@ -20,11 +20,14 @@ from django.shortcuts import render
 #         # context['plotly_sample'] = 'SimpleExample'
 #         print(context)
 #         return context
+def console_print():
+    return print('# # # # # # # # # # # # # # # # # # # # # # # #'),\
+           print("# # # # # # # # Django's views # # # # # # # #"),\
+           print('# # # # # # # # # # # # # # # # # # # # # # # #')
 
 def vehicles_app(request):
-    print('# # # # # # # # # # # # # # # # # # # # # # # #')
-    print("# # # # # # # # Django's views # # # # # # # #")
-    print('# # # # # # # # # # # # # # # # # # # # # # # #')
+    console_print()
+    print('render vehicles/list.html')
     # breakpoint()
     return render(request, 'vehicles/list.html')
 
@@ -38,6 +41,9 @@ def get_all_vehicles():
     queryset = Specification.objects.all()
     return queryset
 
+def selected_vehicle(id):
+    vehicle = Specification.objects.get(pk=id)
+
 def fuel_type_choices():
     fuel_type_choices = []
     for value, label in Specification.fuel_type.field.choices:
@@ -47,3 +53,7 @@ def fuel_type_choices():
 def save_vehicle(plate_number, fuel_type, odometer, odo_date_as_of, other_details):
     vehicle = Specification(plate_number=plate_number, fuel_type=fuel_type, odometer=odometer, odo_date_as_of=odo_date_as_of, other_details=other_details)
     vehicle.save()
+
+def delete_vehicle(id):
+    vehicle = Specification.objects.get(pk=id)
+    vehicle.delete()

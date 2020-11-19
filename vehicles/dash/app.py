@@ -9,6 +9,8 @@ app = DjangoDash(
 )
 
 # app.css.append_css({'external_url':dbc.themes.BOOTSTRAP})
+app.css.append_css({'external_url':'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'})
+app.css.append_css({'external_url':'assets/hover-me.css'})
 
 # app.css.append_css({'relative_package_path': ''})  # (?) elephantttttt for icons!
 
