@@ -2,7 +2,6 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
 import dash_bootstrap_components as dbc
-from dash.dash import no_update
 from django.utils import timezone
 
 from ..app import app
@@ -39,12 +38,13 @@ layout = dbc.Card(
                     clearable=True,
                     # with_portal=True,
                     date=timezone.now().strftime(format='%Y-%m-%d'),
-                    className='mb-3'),
+                    className='mb-3',
+                ),
 
                 # other_details
                 html.Br(),
                 dbc.Label('Other details', html_for='inputOtherDetails'),
-                dbc.Textarea(id='inputOtherDetails', bs_size='lg')
+                dbc.Textarea(id='inputOtherDetails', bs_size='lg'),
             ],
             # style={'margin-top': '63px', 'margin-bottom': '63px'}
         ),
@@ -73,6 +73,7 @@ layout = dbc.Card(
     ]
 )
 def save_and_toggle_alert(n, plate_number, fuel_type, odometer, odo_date, other_details, is_open, **kwargs):
+    breakpoint()
     if (plate_number and
             fuel_type and
             odometer and

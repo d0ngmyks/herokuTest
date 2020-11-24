@@ -1,11 +1,12 @@
 import dash_core_components as dcc
 import dash_html_components as html
-from dash.dependencies import Input, Output, State
+from dash.dependencies import Input, Output, \
+    State  # , ALL, ALLSMALLER, MATCH  # https://dash.plotly.com/pattern-matching-callbacks
 import dash_bootstrap_components as dbc
 from dash.dash import no_update
 
 from .app import app
-from .apps import create_vehicle_layout, delete_vehicle_layout
+from .apps import create_vehicle_layout, delete_vehicle_layout, view_vehicle_layout
 
 from ..views import get_all_vehicles
 
@@ -41,7 +42,7 @@ app.layout = html.Div(
                 )
             ),
             # test
-            html.Div(id='test-div')
+            html.Div(id='test-div'),
         ])
     ],
 )
@@ -55,8 +56,11 @@ app.layout = html.Div(
     [
         Input('vehicle-url', 'pathname')
     ],
+    [
+        State('vehicle-url', 'search'),
+    ]
 )
-def display_vehicle_card(pathname, **kwargs):
+def display_vehicle_card(pathname, search, **kwargs):
     print('# # # # # # # # # # # # # # # # # # # # # # # #')
     print("# # # # # # # # index.py's callback # # # # # #")
     print('# # # # # # # # # # # # # # # # # # # # # # # #')
@@ -70,9 +74,10 @@ def display_vehicle_card(pathname, **kwargs):
         for vehicle in get_all_vehicles():
             result.append(
                 dbc.ListGroupItem(
+                    id=f'listGroupItem{vehicle.id}',
                     className='hoverable-listgroup-item',
                     action=True,
-                    href='#',
+                    href=f'/apps/view-vehicle/?q={vehicle.id}',
                     children=[
                         vehicle.plate_number,
                         html.Div(
@@ -81,10 +86,12 @@ def display_vehicle_card(pathname, **kwargs):
                                 dbc.Button(
                                     id='btnEditVehicle',
                                     className='fa fa-pencil fa-lg', color='primary',
-                                    outline=True, style={'border': 'none'}
+                                    outline=True, style={'border': 'none'},
+                                    # href= edit link
                                 ),
                                 dbc.Button(
-                                    id='btnDeleteVehicle',
+                                    # id='btnDeleteVehicle',
+                                    id=f'btnDeleteVehicle{vehicle.id}',
                                     className='fa fa-trash-o fa-lg', color='danger',
                                     outline=True, style={'border': 'none'},
                                     href=f'/apps/delete-vehicle/?q={vehicle.id}'
@@ -98,15 +105,35 @@ def display_vehicle_card(pathname, **kwargs):
         main_menu = dbc.Card(
             [
                 dbc.Tooltip('Edit', target='btnEditVehicle') if result else '',
-                dbc.Tooltip('Delete', target='btnDeleteVehicle') if result else '',
+                dbc.Tooltip('Delete', target='btnDeleteVehicle54') if result else '',
+                # dbc.Tooltip('Delete', target='btnDeleteVehicle') if result else '',
                 dbc.CardHeader(dbc.CardLink('Add vehicle', href='/apps/add-vehicle/')),
                 dbc.CardBody(
                     [
-                        html.H5("All vehicles", className="card-subtitle"),  # can add filtering
+                        html.H5(
+                            dbc.Row(
+                                dbc.Col(
+                                    [
+                                        "All vehicles",  # add filtering
+                                        dbc.DropdownMenu(
+                                            [
+                                                dbc.DropdownMenuItem('Dash(?)'),
+                                                dbc.DropdownMenuItem('JSON'),
+                                                dbc.DropdownMenuItem('XML'),
+                                            ],
+                                            label="View",
+                                            color="link",
+                                            className="float-right",  # should use col (grid layout)
+                                        ),
+                                    ]
+                                )
+                            ),
+                            className="card-subtitle"
+                        ),
                         dbc.ListGroup(
                             flush=True,
                             children=result if result else dbc.ListGroupItemText('No records found.')
-                        )
+                        ),
                     ]
                 ),
             ]
@@ -114,10 +141,10 @@ def display_vehicle_card(pathname, **kwargs):
         return f'Current path name is {pathname}', main_menu
     elif pathname == '/apps/add-vehicle/':
         return f'Current path name is {pathname}', create_vehicle_layout.layout
-    # elif pathname == '/apps/delete-vehicle/':
-    #     print('* * * main-menu delete button * * *')
-    #     search = str(search).replace('?q=', '')
-    #     return f'Current path name is {pathname}', delete_vehicle_layout.confirm_delete_modal(search)
+    elif pathname == '/apps/view-vehicle/':
+        print('* * * main-menu view vehicle * * *')
+        vehicle_id = str(search).replace('?q=', '')
+        return f'Current path name is {pathname}', view_vehicle_layout.card(vehicle_id)
     else:
         return f'Current path name is {pathname}', no_update
 
@@ -128,14 +155,13 @@ def display_vehicle_card(pathname, **kwargs):
         Output('main-modal', 'children'),
     ],
     [Input('vehicle-url', 'pathname')],
-    [State('vehicle-url', 'search')]
+    [
+        State('vehicle-url', 'search'),
+    ]
 )
 def toggle_main_modal(pathname, search, **kwargs):
     if pathname == '/apps/delete-vehicle/':
-        search = str(search).replace('?q=', '')
-        # return delete_vehicle_layout.modal_children(search)
-        # if n1 or n2:
-        #     return not is_open
-        return True, delete_vehicle_layout.modal_children(search)
+        vehicle_id = str(search).replace('?q=', '')
+        return True, delete_vehicle_layout.modal_children(vehicle_id)
     else:
         return False, no_update

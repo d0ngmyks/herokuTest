@@ -7,34 +7,11 @@ from ...views import delete_vehicle
 from ...models import Specification
 
 
-# def confirm_delete_modal(vehicle_id):
-#     # try:
-#     #     vehicle_details = str(Specification.objects.get(pk=vehicle_id))
-#     # except Specification.DoesNotExist:
-#     #     vehicle_details = None
-#     modal = dbc.Modal(
-#         is_open=True, backdrop='static', centered=True,
-#         children=[
-#             dbc.ModalHeader("Delete vehicle"),
-#             dbc.ModalBody(str(Specification.objects.get(pk=vehicle_id))),
-#             dbc.ModalFooter(
-#                 html.Div(
-#                     className="ml-auto",
-#                     children=[
-#                         dbc.Button(
-#                             id="cancel", color='secondary', children='Cancel',
-#                             href='/vehicles/main-menu/'
-#                         ),
-#                         dbc.Button(
-#                             id="delete", color='danger', children='Delete',
-#                             href=f'/confirm-delete/?q={vehicle_id}'
-#                         )
-#                     ]
-#                 )
-#             ),
-#         ],
-#     )
-#     return modal
+# try:
+#     vehicle_details = str(Specification.objects.get(pk=vehicle_id))
+# except Specification.DoesNotExist:
+#     vehicle_details = None
+
 
 def modal_children(vehicle_id):
     return [

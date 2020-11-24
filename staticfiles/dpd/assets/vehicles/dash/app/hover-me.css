@@ -1,3 +1,7 @@
-.hover-me{
-    background-color: red;
+.show-on-hover {
+    display: none;
+}
+
+.hoverable-listgroup-item:hover .show-on-hover {
+    display: inline-block;
 }

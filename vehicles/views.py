@@ -41,14 +41,19 @@ def get_all_vehicles():
     queryset = Specification.objects.all()
     return queryset
 
-def selected_vehicle(id):
-    vehicle = Specification.objects.get(pk=id)
+# def selected_vehicle(id):
+#     vehicle = Specification.objects.get(pk=id)
 
 def fuel_type_choices():
     fuel_type_choices = []
     for value, label in Specification.fuel_type.field.choices:
         fuel_type_choices.append({'value': value, 'label': label})
     return fuel_type_choices
+
+# def get_fuel_label(val):
+#     for value, label in Specification.fuel_type.field.choices:
+#         if value == val:
+#             return label
 
 def save_vehicle(plate_number, fuel_type, odometer, odo_date_as_of, other_details):
     vehicle = Specification(plate_number=plate_number, fuel_type=fuel_type, odometer=odometer, odo_date_as_of=odo_date_as_of, other_details=other_details)
@@ -57,3 +62,10 @@ def save_vehicle(plate_number, fuel_type, odometer, odo_date_as_of, other_detail
 def delete_vehicle(id):
     vehicle = Specification.objects.get(pk=id)
     vehicle.delete()
+
+# # # # # # # # #
+# # D A S H 2 # #
+# # # # # # # # #
+def load_main_layout(request):
+    print('dash2')
+    return render(request, 'vehicles/dash2.html')

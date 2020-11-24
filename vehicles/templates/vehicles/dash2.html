@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+{% load plotly_dash %}
+
+{% block content %}
+    <style>
+        .django-plotly-dash-app-vehiclesdashapp2 div {
+            top: 0 !important;
+            left: 0 !important;
+            {#overflow: hidden;#}
+            right: 0 !important;
+            bottom: 0 !important;
+            height: calc(100vh - 81px) !important;
+            position: fixed !important;
+        }
+    </style>
+
+    <div class="{% plotly_class name='VehiclesDashApp2' %}">
+        {% plotly_app name='VehiclesDashApp2' %}
+    </div>
+
+{% endblock %}
+
+<!--plotly class
+    top: 0 !important;
+    left: 0 !important;
+    {#overflow: hidden;#}
+    right: 0 !important;
+    bottom: 0 !important;
+    height: calc(100vh - 81px) !important;
+    position: fixed !important;
+-->
